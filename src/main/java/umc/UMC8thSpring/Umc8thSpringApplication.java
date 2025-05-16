@@ -1,12 +1,8 @@
 package umc.UMC8thSpring;
 
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
-import umc.UMC8thSpring.service.StoreService.StoreQueryService;
 
 @SpringBootApplication
 @EnableJpaAuditing
@@ -16,7 +12,7 @@ public class Umc8thSpringApplication {
 		SpringApplication.run(Umc8thSpringApplication.class, args);
 	}
 
-	@Bean
+/*	@Bean
 	public CommandLineRunner run(ApplicationContext context) {
 		return args -> {
 			StoreQueryService storeService = context.getBean(StoreQueryService.class);
@@ -33,5 +29,5 @@ public class Umc8thSpringApplication {
 			storeService.findStoresByNameAndScore(name, score)
 					.forEach(System.out::println);
 		};
-	}
+	}*/
 }
