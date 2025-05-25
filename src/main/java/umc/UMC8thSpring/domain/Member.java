@@ -2,6 +2,9 @@ package umc.UMC8thSpring.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 import umc.UMC8thSpring.domain.common.BaseEntity;
 import umc.UMC8thSpring.domain.enums.Gender;
 import umc.UMC8thSpring.domain.enums.MemberStatus;
@@ -17,6 +20,8 @@ import java.util.List;
 @Entity
 @Getter
 @Builder
+@DynamicUpdate
+@DynamicInsert // null인 경우 그냥 쿼리를 보내지 않도록 한다.
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member extends BaseEntity {
@@ -35,22 +40,23 @@ public class Member extends BaseEntity {
     private String specAddress;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    //@Column(nullable = false, length = 10)
     private Gender gender;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 10)
+    //@Column(nullable = false, length = 10)
     private SocialType socialType;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 15)
+    //@Column(nullable = false, length = 15)
     private MemberStatus status;
 
     private LocalDate inactiveDate;
 
-    @Column(nullable = false, length = 50)
+    //@Column(nullable = false, length = 50)
     private String email;
 
+    @ColumnDefault("0")
     private Integer point;
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
