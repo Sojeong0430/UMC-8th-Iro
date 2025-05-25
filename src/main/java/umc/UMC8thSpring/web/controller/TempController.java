@@ -27,4 +27,10 @@ public class TempController {
         tempQueryService.CheckFlag(flag);
         return ApiResponse.onSuccess(TempConverter.toTempExceptionDTO(flag));
     }
+
+    @GetMapping("/error")
+    public String throwError() {
+        throw new RuntimeException("🚨 강제로 발생시킨 500 에러입니다.");
+    }
+
 }
