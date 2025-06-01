@@ -1,6 +1,8 @@
 package umc.UMC8thSpring.service.ReviewService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.UMC8thSpring.domain.Member;
 import umc.UMC8thSpring.domain.Review;
@@ -34,5 +36,10 @@ public class ReviewService {
                 .build();
 
         reviewRepository.save(review);
+    }
+
+    public Page<Review> getMyReviewList(Integer page) {
+        Page<Review> StorePage = reviewRepository.findAll(PageRequest.of(page, 10));
+        return StorePage;
     }
 }

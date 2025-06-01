@@ -1,6 +1,8 @@
 package umc.UMC8thSpring.service.MissionService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import umc.UMC8thSpring.apiPayload.code.status.ErrorStatus;
 import umc.UMC8thSpring.apiPayload.exception.handler.TempHandler;
@@ -28,7 +30,11 @@ public class MissionService {
                 .mission(mission)
                 .member(member)
                 .build();
-
         memberMissionRepository.save(memberMission);
+    }
+
+    public Page<Mission> getMissionList(Integer page) {
+        Page<Mission> missionPage = missionRepository.findAll(PageRequest.of(page, 10));
+        return missionPage;
     }
 }
