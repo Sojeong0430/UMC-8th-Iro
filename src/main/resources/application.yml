@@ -15,9 +15,14 @@ spring:
         format_sql: true
         use_sql_comments: true
         hbm2ddl:
-          auto: none
+          auto: update
         default_batch_fetch_size: 1000
   logging:
     discord:
       webhook-uri: ${DISCORD_WEBHOOK_URL}
       name: discord-feign-client
+jwt:
+  token:
+    secretKey: umceightfightingjwttokenauthentication
+    expiration:
+      access: 14400000

@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import umc.UMC8thSpring.domain.common.BaseEntity;
 import umc.UMC8thSpring.domain.enums.Gender;
 import umc.UMC8thSpring.domain.enums.MemberStatus;
+import umc.UMC8thSpring.domain.enums.Role;
 import umc.UMC8thSpring.domain.enums.SocialType;
 import umc.UMC8thSpring.domain.mapping.MemberAgree;
 import umc.UMC8thSpring.domain.mapping.MemberMission;
@@ -25,6 +26,15 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class Member extends BaseEntity {
+
+    @Column(nullable = false, unique = true)
+    private String email;
+
+    @Column(nullable = false)
+    private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,9 +63,6 @@ public class Member extends BaseEntity {
 
     private LocalDate inactiveDate;
 
-    //@Column(nullable = false, length = 50)
-    private String email;
-
     @ColumnDefault("0")
     private Integer point;
 
@@ -70,4 +77,8 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private List<MemberMission> memberMissionList = new ArrayList<>();
+
+    public void encodePassword(String password) {
+        this.password = password;
+    }
 }
